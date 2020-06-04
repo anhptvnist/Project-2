@@ -4,15 +4,12 @@ const {loginValidation} = require('./validation');
 const User = require('../../models/user.model');
 
 exports.login = async(data)=>{
-    console.log("----", data);
     const {error} = loginValidation(data);
     if(error) throw (error.details[0].message);
-
     const user = await User.findOne({email: data.email});
-    console.log("----", user);
     if(!user) throw ["email_invalid"];
     const validPass = await bcrypt.compare(data.password, user.password);
-    console.log("======", validPass);
+
 
     if(!validPass)  throw ['password_invalid'];
     const token = await jwt.sign(
@@ -24,7 +21,6 @@ exports.login = async(data)=>{
     user.tokens.push(token);
     user.save();
     
-    console.log("++++++", user);
     return { 
             token,
             user: {
