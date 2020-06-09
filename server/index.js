@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 const auth = require('./modules/auth/auth.route');
+const admin =require('./modules/admin/admin.route')
 const app = express();
 app.use(bodyParser.json());
 const db = process.env.DATABASE;// DB Config
@@ -21,6 +22,7 @@ global.isLog = false;
 app.use(cors());
 
 app.use('/auth', auth);
+app.use('/admin', admin);
 
 
 const port = process.env.PORT || 5000;

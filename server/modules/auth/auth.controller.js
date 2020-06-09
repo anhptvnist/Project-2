@@ -19,17 +19,13 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
     try {
         var logout = await AuthService.logout(req.user._id, req.token);
-        res.status(200).json({
-            success: true,
-            messages: ['logout_success'],
-            content: logout
-        });
+
+        //isLog && Logger.info(`[LOGOUT]` + req.body.email);
+        res.status(200).json(logout);
     } catch (error) {
-        res.status(400).json({
-            success: false,
-            messages: Array.isArray(error) ? error : ['logout_faile'],
-            content: error
-        });
+
+        //isLog && Logger.error(`[LOGOUT]` + req.body.email);
+        res.status(400).json(error);
     }
 };
 
