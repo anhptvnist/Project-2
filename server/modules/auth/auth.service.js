@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {loginValidation} = require('./validation');
 const User = require('../../models/user.model');
+const Lecturer = require('../../models/lecturer.model');
+const Student = require('../../models/student.model')
 
 exports.login = async(data)=>{
     const {error} = loginValidation(data);
@@ -33,17 +35,16 @@ exports.login = async(data)=>{
 };
 
 
-exports.logout = async (id, token) => {
-    console.log("=====", id, token);
-    var user = await User.findById(id);
-    var position = await user.tokens.indexOf(token);
+exports.logout = async (data) => {
+    var user = await User.findById(data.id);
+    var position = await user.tokens.indexOf(data.token);
+    console.log("position", position);
     user.tokens.splice(position, 1);
     user.save();
     return user;
 }
 
 exports.register = async (data) =>{
-    console.log("---", data);
     const emailExist = await User.findOne({email : data.email});
     if(emailExist) throw ["email_was_used"];
     const userNameExist = await User.findOne({name : data.name});
@@ -56,6 +57,21 @@ exports.register = async (data) =>{
         email : data.email,   
         role: data.role,
     })
+    if(user.role == 1){
+         var lecturer = Lecturer.create({
+             userId: user._id,
+         })
+    }
+    if(user.role == 2){
+        var student = Student.create({
+            userId: user._id,
+        })
+   }
+    const listuser = await User.find({});
+    return listuser;
+}
 
-    return user
+exports.getUserByID =async(data)=>{
+    var Userofme = await User.findById(data.id).select('name email');
+    return Userofme;
 }

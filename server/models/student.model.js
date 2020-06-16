@@ -10,7 +10,6 @@ const StudentSchema = new Schema({
     },
     grade: {
         type: Number,
-        required: true
     },
 
 })
