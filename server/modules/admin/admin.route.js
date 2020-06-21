@@ -26,4 +26,8 @@ router.delete('/deleteclass/:id', AdminController.deleteClass);
 router.post('/assignment/:id/:idtern/:idclass', AdminController.assignment);
 router.get('/getlecturer', AdminController.getLecturer);
 router.get('/listclassoflec/:id/:idtern', AdminController.getlistclassofLecturer);
+router.post('/setpoint', AdminController.setPointOfStudent);
+router.get('/getstudents/:code', AdminController.getStudents);
+router.post('/editstudent', AdminController.editStudents);
+router.get('/updatestudent', AdminController.updateStudents);
 module.exports = router;

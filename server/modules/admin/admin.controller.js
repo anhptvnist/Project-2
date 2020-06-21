@@ -445,3 +445,71 @@ exports.getSession =async (req, res) => {
         })
     }
  }
+
+ exports.setPointOfStudent =async (req, res) => {
+    try {
+        var classes = await AdminService.setPointOfStudent(req.body);
+        res.status(200).json({
+            success: true,
+            messages: ['set_point_success'],
+            content: classes
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: ['set_point _fail'],
+            content: error
+        })
+    }
+};
+
+exports.getStudents=async (req, res) => {
+    try {
+        var classes = await AdminService.getStudents(req.params);
+        res.status(200).json({
+            success: true,
+            messages: ['get_students_success'],
+            content: classes
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: ['get_students_fail'],
+            content: error
+        })
+    }
+};
+
+exports.editStudents=async (req, res) => {
+    try {
+        var classes = await AdminService.editStudents(req.body);
+        res.status(200).json({
+            success: true,
+            messages: ['edit_students_success'],
+            content: classes
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: ['edit_students_fail'],
+            content: error
+        })
+    }
+};
+
+exports.updateStudents=async (req, res) => {
+    try {
+        var classes = await AdminService.updateStudents(req.body);
+        res.status(200).json({
+            success: true,
+            messages: ['update_students_success'],
+            content: classes
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            messages: ['update_students_fail'],
+            content: error
+        })
+    }
+};

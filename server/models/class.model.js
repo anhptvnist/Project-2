@@ -5,25 +5,36 @@ const Subject = require("./subject.model");
 const Student = require("./student.model");
 const Tern = require("./tern.model");
 const ClassSchema = new Schema({
-    code:{
+    code: {
         type: String,
         required: true,
     },
-    subjectId:{
+    subjectId: {
         type: Schema.Types.ObjectId,
         ref: Subject,
         required: true
     },
-    lecturerId:{
+    lecturerId: {
         type: Schema.Types.ObjectId,
         ref: Lecturter,
     },
-    students:[{
-        type: Schema.Types.ObjectId,
-        ref: Student,
-        required: true,
+    students: [{
+        student: {
+            type: Schema.Types.ObjectId,
+            ref: Student,
+            required: true,
+        },
+        midPoint: {
+            type: Number
+        },
+        endPoint: {
+            type: Number
+        },
+        result: {
+            type: Number
+        }
     }],
-    status:{
+    status: {
         // 0: Đang mở đăng ký, 1: Đang hoạt động, 2: Đã kết thúc, 3: Hủy lớp
         type: Number,
         required: true,
@@ -33,34 +44,34 @@ const ClassSchema = new Schema({
         default: Date.now
     },
     updatedAt: {
-        type : Date,
+        type: Date,
         default: Date.now
-    }  ,
+    },
     tern: {
         type: Schema.Types.ObjectId,
         ref: Tern,
         required: true
-    }, 
-    slot:{
+    },
+    slot: {
         type: Number,
         required: true,
     },
-    slotmax:{
+    slotmax: {
         type: Number,
         required: true,
     },
-    day:{
+    day: {
         type: Number,
         required: true,
     },
-    startDate:{
+    startDate: {
         type: String,
         required: true,
     },
-    endDate:{
+    endDate: {
         type: String,
         required: true,
     },
 });
 
-module.exports = Classes = mongoose.model('class', ClassSchema)
+module.exports = Classes = mongoose.model('classes', ClassSchema)

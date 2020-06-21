@@ -65,6 +65,9 @@ exports.register = async (data) =>{
     if(user.role == 2){
         var student = Student.create({
             userId: user._id,
+            pass: 0,
+            warning: 0,
+            fail: 0,
         })
    }
     const listuser = await User.find({});
