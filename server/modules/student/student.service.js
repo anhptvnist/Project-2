@@ -180,3 +180,7 @@ exports.getInfoStudent = async(data) => {
         .populate({ path: "userId", select: "name email" })
     return student;
 }
+
+exports.test = async(data) => {
+   console.log("data", data)
+}
